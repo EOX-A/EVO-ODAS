@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 if [[ $# -lt 2 ]] || [[ $# -gt 3 ]] ; then
     echo 'Invalid number of arguments given: <url-list> <out-dir> required'
