@@ -1,0 +1,41 @@
+[{
+    "bands": [
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B1\r\n    BANDWIDTH=20\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=1913.57\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=443\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B1",
+            "name": "B1",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        },
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B9\r\n    BANDWIDTH=20\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=813.04\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=945\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B9",
+            "name": "B9",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        },
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B10\r\n    BANDWIDTH=30\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=367.15\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=1375\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B10",
+            "name": "B10",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        }
+    ],
+    "name": "Sentinel-2_60m"
+}]

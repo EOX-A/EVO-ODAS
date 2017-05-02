@@ -1,0 +1,53 @@
+[{
+    "bands": [
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B4\r\n    BANDWIDTH=30\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=1512.79\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=665\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B4",
+            "name": "B4",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        },
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B3\r\n    BANDWIDTH=35\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=1822.61\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=560\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B3",
+            "name": "B3",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        },
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B2\r\n    BANDWIDTH=65\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=1941.63\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=490\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B2",
+            "name": "B2",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        },
+        {
+            "color_interpretation": "Undefined",
+            "data_type": "UInt16",
+            "definition": "",
+            "description": "    BANDNAME=B8\r\n    BANDWIDTH=115\r\n    BANDWIDTH_UNIT=nm\r\n    SOLAR_IRRADIANCE=1036.39\r\n    SOLAR_IRRADIANCE_UNIT=W/m2/um\r\n    WAVELENGTH=842\r\n    WAVELENGTH_UNIT=nm",
+            "identifier": "B8",
+            "name": "B8",
+            "nil_values": [],
+            "uom": "W/m2/um",
+            "value_max": "",
+            "value_min": ""
+        }
+    ],
+    "name": "Sentinel-2_10m"
+}]
