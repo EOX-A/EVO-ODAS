@@ -9,3 +9,5 @@ RUN apt-add-repository ppa:ubuntugis/ubuntugis-unstable \
         python-gdal gdal-bin libgeos-dev libpython-dev libproj-dev python-pyproj python-shapely
 
 RUN pip install https://github.com/constantinius/s2reader/archive/transform.zip
+
+WORKDIR /var
