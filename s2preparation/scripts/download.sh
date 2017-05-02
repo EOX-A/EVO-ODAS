@@ -10,4 +10,4 @@ DOWNLOAD_DIR=$2
 
 mkdir -p $DOWNLOAD_DIR
 
-wget -nc -c -nd -i $URL_LIST -P $DOWNLOAD_DIR
+wget -c -nd -i $URL_LIST -P $DOWNLOAD_DIR

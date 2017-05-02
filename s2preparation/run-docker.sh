@@ -20,7 +20,8 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
 fi
 
 docker run \
+    -v `pwd`/scripts:/var/scripts \
     -v `pwd`/$OUT_DIR:/var/out \
     -v `pwd`/$DOWNLOAD_DIR:/var/download \
     -v `pwd`/$URL_LIST_DIR:/var/urldir \
-    $IMAGE_NAME ./run.sh /var/urldir/$URL_LIST_BASE /var/out /var/download
+    $IMAGE_NAME /var/scripts/run.sh /var/urldir/$URL_LIST_BASE /var/out /var/download
