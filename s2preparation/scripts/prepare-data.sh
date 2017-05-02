@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 if [[ $# -ne 2 ]] ; then
     echo 'Invalid number of arguments given: <safe-package> <out-dir> required'
@@ -8,15 +8,12 @@ fi
 SAFE_PKG=$1
 OUT_DIR=$2
 
-mkdir -p OUT_DIR
-
-BASENAME=$(basename "$SAFE_PKG")
+SAFE_BASENAME=$(basename "$SAFE_PKG")
 EXT="${SAFE_PKG##*.}"
-
 
 # treat zipped SAFE differently
 if [ "$EXT" == "zip" ] ; then
-    BASE_PATH="/vsizip/$SAFE_PKG/${BASENAME%.*}/MTD_MSIL1C.xml"
+    BASE_PATH="/vsizip/$SAFE_PKG/${SAFE_BASENAME%.*}/MTD_MSIL1C.xml"
 else
     BASE_PATH="$SAFE_PKG/MTD_MSIL1C.xml"
 fi
@@ -37,8 +34,23 @@ for resolution in 10 20 60 ; do
         # GRANULE_ID="$(basename $GRANULE_ID)"
 
         # perform data extraction
-        gdal_translate $SUBDATASET "$OUT_DIR/${BASENAME}__${resolution}m.tif" \
+
+        tiff_basename=${SAFE_BASENAME}__${resolution}m.tif
+        filename="${OUT_DIR}/${tiff_basename}"
+
+
+        echo "Preprocessing ${resolution}m for ${SAFE_BASENAME}"
+        gdal_translate $SUBDATASET $filename \
                  -co TILED=YES --config GDAL_CACHEMAX 1000 --config GDAL_NUM_THREADS 4 \
                  -co COMPRESS=LZW
+
+        echo "Building overviews for ${tiff_basename}"
+        if [[ $resolution == "10" ]] ; then
+            gdaladdo --config COMPRESS_OVERVIEW LZW $filename 2 4 8 16 32 64 128 256
+        elif [[ $resolution == "20" ]] ; then
+            gdaladdo --config COMPRESS_OVERVIEW LZW $filename 2 4 8 16 32 64 128
+        elif [[ $resolution == "60" ]] ; then
+            gdaladdo --config COMPRESS_OVERVIEW LZW $filename 2 4 8 16 32 64
+        fi
     done
 done
