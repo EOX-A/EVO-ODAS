@@ -13,4 +13,31 @@ setup script can be found in ``scripts/install-ubuntu.sh``
 
 ## Usage
 
-./run.sh -d download_dir/ url-list.txt
+To run the preprocessing, you first have to obtain a URL-list of SAFE files to
+process. Such a file can be obtained from
+[CODE-DE](https://code-de.org/en/marketplace/view?filter%5B%5D=satellite%3ASentinel-2&sort=asc%3Atitle).
+
+    scripts/run.sh url-list.txt output_dir/ download_dir/
+
+Before the prepared data can be used the `output_dir/` and the `range_types/`
+directories have to be made available for the EOxServer instance.
+The preprocessed datasets can now be registered in an EOxServer instance using
+the following commands.
+
+    for resolution in 10 20 60 ; do
+        python manage.py eoxs_rangetype_load -i range_types/Sentinel-2_${resolution}m
+    done
+
+    python manage.py eoxs_collection_create -i S2A_OPER
+
+    for resolution in 10 20 60 ; do
+        for filename in output_dir/*${resolution}m.tif;  do
+            python manage.py eoxs_dataset_register -r Sentinel-2_${resolution}m -d "$filename" -m "${filename//.tif/.xml}" --collection "S2A_OPER" --replace --traceback;
+        done
+    done
+
+## Usage with Docker
+
+Since the scripts are based on a Ubuntu setup, a Docker setup is provided to
+help use the scripts on other systems as well. To use the Docker version, use
+the `scripts/run-docker.sh` script instead of `scripts/run.sh`
