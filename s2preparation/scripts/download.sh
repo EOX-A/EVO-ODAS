@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 if [[ $# -ne 2 ]] ; then
     echo 'Invalid number of arguments given: <url-list> <download-dir> required'
@@ -10,4 +10,4 @@ DOWNLOAD_DIR=$2
 
 mkdir -p $DOWNLOAD_DIR
 
-wget -nc -nd -i $URL_LIST -P $DOWNLOAD_DIR
+wget -nc -c -nd -i $URL_LIST -P $DOWNLOAD_DIR
