@@ -1,3 +1,5 @@
+#/bin/bash -e
+
 apt-get update
 apt-get install -y software-properties-common --no-install-recommends
 apt-add-repository ppa:ubuntugis/ubuntugis-unstable
