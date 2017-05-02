@@ -1,6 +1,11 @@
 FROM ubuntu:14.04
 
-COPY . /opt/s2preparation
-WORKDIR /opt/s2preparation
+RUN apt-get update \
+&& apt-get install -y -o Dpkg::Options::="--force-confnew" software-properties-common --no-install-recommends
+RUN apt-add-repository ppa:ubuntugis/ubuntugis-unstable \
+&& apt-get update \
+&& apt-get install -y -o Dpkg::Options::="--force-confnew" \
+        python-pip python-lxml wget \
+        python-gdal gdal-bin libgeos-dev libpython-dev libproj-dev python-pyproj python-shapely
 
-RUN scripts/install-ubuntu.sh
+RUN pip install https://github.com/constantinius/s2reader/archive/transform.zip
