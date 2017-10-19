@@ -1,11 +1,8 @@
-layer: Sentinel-2
-bbox: [10.2, 46.7, 18.0, 49.7]
-time: [!!timestamp '2017-05-01T10:00:31', !!timestamp '2017-06-03T10:10:31']
+layer: SENTINEL2
+bbox: [0.0, 36.0, 24.0, 54.0]
+time: [!!timestamp '2017-10-15T09:00:00', !!timestamp '2017-10-15T11:00:00']
 metadata:
   cloudCover:
     min: 0
     max: 100
-  orbitDirection:
-    - DESCENDING
-    - ASCENDING
 
