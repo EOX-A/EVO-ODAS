@@ -45,6 +45,11 @@
             <stringProp name="Argument.value">/eoxserver/opensearch</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="eoxserver_ows_path" elementType="Argument">
+            <stringProp name="Argument.name">eoxserver_ows_path</stringProp>
+            <stringProp name="Argument.value">/eoxserver/ows</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="geoserver_cql_mapping" elementType="Argument">
             <stringProp name="Argument.name">geoserver_cql_mapping</stringProp>
             <stringProp name="Argument.value">cloudCover=optCloudCover</stringProp>
@@ -400,6 +405,7 @@ catch (Throwable ex) {
 	}
 
 	vars.put(&quot;geoserver_cql&quot;, String.join(&quot; AND &quot;, geoServerValues));
+	vars.put(&quot;eoxserver_cql&quot;, String.join(&quot; AND &quot;, eoxServerValues));
 /*
 	
 //}
@@ -548,19 +554,68 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="WMS EOxServer" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="cloudCover" elementType="HTTPArgument">
+                <elementProp name="service" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${cloudCover}</stringProp>
+                  <stringProp name="Argument.value">WMS</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">cloudCover</stringProp>
+                  <stringProp name="Argument.name">service</stringProp>
                 </elementProp>
-                <elementProp name="orbitDirection" elementType="HTTPArgument">
+                <elementProp name="version" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${orbitDirection}</stringProp>
+                  <stringProp name="Argument.value">1.1.0</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">orbitDirection</stringProp>
+                  <stringProp name="Argument.name">version</stringProp>
+                </elementProp>
+                <elementProp name="srs" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">EPSG:4326</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">srs</stringProp>
+                </elementProp>
+                <elementProp name="request" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">GetMap</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">request</stringProp>
+                </elementProp>
+                <elementProp name="width" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">512</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">width</stringProp>
+                </elementProp>
+                <elementProp name="height" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">512</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">height</stringProp>
+                </elementProp>
+                <elementProp name="format" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">image/png</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">format</stringProp>
+                </elementProp>
+                <elementProp name="transparent" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">true</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">transparent</stringProp>
+                </elementProp>
+                <elementProp name="layers" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${layer}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">layers</stringProp>
                 </elementProp>
                 <elementProp name="bbox" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -569,19 +624,19 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">bbox</stringProp>
                 </elementProp>
-                <elementProp name="start" elementType="HTTPArgument">
+                <elementProp name="time" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${startTime}</stringProp>
+                  <stringProp name="Argument.value">${time}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">start</stringProp>
+                  <stringProp name="Argument.name">time</stringProp>
                 </elementProp>
-                <elementProp name="end" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${endTime}</stringProp>
+                <elementProp name="cql_filter" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">${eoxserver_cql}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">end</stringProp>
+                  <stringProp name="Argument.name">cql_filter</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -626,26 +681,29 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="script">response = prev.getResponseDataAsString(); 
 data_length = new Integer(response.length()); 
-vars.put(&quot;geos_data_length&quot;, data_length.toString()); 
+vars.put(&quot;eoxs_data_length&quot;, data_length.toString()); 
 </stringProp>
             </BeanShellPostProcessor>
             <hashTree/>
           </hashTree>
-          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Total Results comparison" enabled="true">
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Size comparison" enabled="true">
             <boolProp name="displayJMeterProperties">false</boolProp>
             <boolProp name="displayJMeterVariables">true</boolProp>
             <boolProp name="displaySystemProperties">false</boolProp>
           </DebugSampler>
           <hashTree>
-            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="TotalResults comparison" enabled="true">
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Result size comparison" enabled="true">
               <stringProp name="BeanShellAssertion.query">try {
-	String var1 = vars.get(&quot;eoxs_result_count&quot;);
-	String var2 = vars.get(&quot;geos_result_count&quot;);
-	
-	Failure = !var1.equals(var2);
+	Integer eoxsLength = new Integer(vars.get(&quot;eoxs_data_length&quot;));
+	Integer geosLength = new Integer(vars.get(&quot;geos_data_length&quot;));
+
+	Integer diff = Math.abs(eoxsLength - geosLength);
+	Float percentage = (((float)diff) / Math.max(eoxsLength, geosLength));
+
+	Failure = percentage &gt; 0.1;
 	
 	if (Failure) {
-	  FailureMessage = &quot;Variables are not equal. Expected \&quot;&quot; + var1 + &quot;\&quot; , actual:\&quot;&quot; + var2 + &quot;\&quot;&quot;;
+	  FailureMessage = &quot;Difference between file sizes is more than 10%. Result sizes: EOxServer: &quot; + eoxsLength + &quot; GeoServer: &quot; + geosLength + &quot; Percentage: &quot; + percentage;
 	}
 }
 catch (Throwable ex) {
