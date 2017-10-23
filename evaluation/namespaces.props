@@ -1,2 +1,5 @@
 atom=http://www.w3.org/2005/Atom
 opensearch=http://a9.com/-/spec/opensearch/1.1/
+parameters=http://a9.com/-/spec/opensearch/extensions/parameters/1.0/
+dc=http://purl.org/dc/elements/1.1/
+georss=http://www.georss.org/georss
