@@ -1,0 +1,3 @@
+implementation,url,root_osdd_path,root_search_path,collection_osdd_path,collection_search_path,count_var,start_index_var
+eoxserver,oda.dlr.de,/eoxserver/opensearch/,/eoxserver/opensearch/atom/,/eoxserver/opensearch/collections/SENTINEL2/,/eoxserver/opensearch/collections/SENTINEL2/atom/,count,startIndex
+geoserver,oda.dlr.de,/eoxserver/opensearch/,/eoxserver/opensearch/atom/,/eoxserver/opensearch/collections/SENTINEL2/,/eoxserver/opensearch/collections/SENTINEL2/atom/,count,startIndex
