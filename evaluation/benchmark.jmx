@@ -27,7 +27,7 @@
           </elementProp>
           <elementProp name="geoserver_url" elementType="Argument">
             <stringProp name="Argument.name">geoserver_url</stringProp>
-            <stringProp name="Argument.value">oda.dlr.de</stringProp>
+            <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="geoserver_opensearch_path" elementType="Argument">
@@ -37,7 +37,7 @@
           </elementProp>
           <elementProp name="eoxserver_url" elementType="Argument">
             <stringProp name="Argument.name">eoxserver_url</stringProp>
-            <stringProp name="Argument.value">oda.dlr.de</stringProp>
+            <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="eoxserver_opensearch_path" elementType="Argument">
@@ -158,7 +158,7 @@ catch (Throwable ex) {
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OpenSearch GeoServer" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OpenSearch GeoServer ${test_me}" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="parentId" elementType="HTTPArgument">
@@ -618,17 +618,6 @@ catch (Throwable ex) {
               <intProp name="Assertion.test_type">8</intProp>
             </ResponseAssertion>
             <hashTree/>
-            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="GeoServer totalResults extractor" enabled="true">
-              <stringProp name="XPathExtractor.default"></stringProp>
-              <stringProp name="XPathExtractor.refname">geos_result_count</stringProp>
-              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-              <stringProp name="XPathExtractor.xpathQuery">//opensearch:totalResults/text()</stringProp>
-              <boolProp name="XPathExtractor.validate">false</boolProp>
-              <boolProp name="XPathExtractor.tolerant">false</boolProp>
-              <boolProp name="XPathExtractor.namespace">true</boolProp>
-              <boolProp name="XPathExtractor.quiet">false</boolProp>
-            </XPathExtractor>
-            <hashTree/>
             <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
@@ -751,17 +740,6 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">8</intProp>
             </ResponseAssertion>
-            <hashTree/>
-            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="EOxServer totalResults extractor" enabled="true">
-              <stringProp name="XPathExtractor.default"></stringProp>
-              <stringProp name="XPathExtractor.refname">eoxs_result_count</stringProp>
-              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-              <stringProp name="XPathExtractor.xpathQuery">//opensearch:totalResults/text()</stringProp>
-              <boolProp name="XPathExtractor.validate">false</boolProp>
-              <boolProp name="XPathExtractor.tolerant">false</boolProp>
-              <boolProp name="XPathExtractor.namespace">true</boolProp>
-              <boolProp name="XPathExtractor.quiet">false</boolProp>
-            </XPathExtractor>
             <hashTree/>
             <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
               <boolProp name="resetInterpreter">false</boolProp>
