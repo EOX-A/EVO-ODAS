@@ -1569,12 +1569,6 @@
               <stringProp name="WhileController.condition"></stringProp>
             </WhileController>
             <hashTree>
-              <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-                <boolProp name="displayJMeterProperties">true</boolProp>
-                <boolProp name="displayJMeterVariables">true</boolProp>
-                <boolProp name="displaySystemProperties">false</boolProp>
-              </DebugSampler>
-              <hashTree/>
               <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
                 <stringProp name="filename">ceos.csv</stringProp>
                 <stringProp name="fileEncoding"></stringProp>
