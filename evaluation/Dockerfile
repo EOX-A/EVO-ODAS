@@ -9,6 +9,7 @@
 #   -e DISPLAY=unix$DISPLAY \
 #   -v `pwd`:/jmeter/ \
 #   -v /dev/shm:/dev/shm \
+#   -w /jmeter/
 #   --name jmeter-3.3 \
 #   jmeter-3.3
 
@@ -44,4 +45,4 @@ RUN apt-get update \
   && /apache-jmeter/bin/PluginsManagerCMD.sh available \
   && /apache-jmeter/bin/PluginsManagerCMD.sh install-all-except
 
-ENTRYPOINT ["apache-jmeter/bin/jmeter"]
+ENTRYPOINT ["/apache-jmeter/bin/jmeter benchmark.jmx"]
