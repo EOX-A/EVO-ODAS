@@ -1,0 +1,3 @@
+implementation,url,port,root_osdd_path,root_search_path,collection_osdd_path,collection_search_path,count_var,start_index_var,supports_wms,supports_wmts,supports_wcs,supports_wfs,supports_wps
+eoxserver,oda.dlr.de,,/eoxserver/opensearch/,/eoxserver/opensearch/atom/,/eoxserver/opensearch/collections/SENTINEL2/,/eoxserver/opensearch/collections/SENTINEL2/atom/,count,startIndex,true,false,true,false,false
+geoserver,oda.dlr.de,,/geoserver/oseo/description,/geoserver/oseo/search,/geoserver/oseo/description?parentId=SENTINEL2,/geoserver/oseo/search?parentId=SENTINEL2,count,startIndex,true,false,true,true,false
