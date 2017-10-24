@@ -118,7 +118,7 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="CSV looper - OpenSearch" enabled="true">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="CSV looper - OpenSearch" enabled="false">
           <stringProp name="WhileController.condition">${layer}</stringProp>
         </WhileController>
         <hashTree>
@@ -158,7 +158,7 @@ catch (Throwable ex) {
 </stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OpenSearch GeoServer ${test_me}" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OpenSearch GeoServer" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="parentId" elementType="HTTPArgument">
@@ -448,8 +448,7 @@ catch (Throwable ex) {
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">true</boolProp>
-            <stringProp name="script">//try {
-	
+            <stringProp name="script">try {
 	Map geoServerMapping = new HashMap();
 	for (String mapping : vars.get(&quot;geoserver_cql_mapping&quot;).split(&quot;,&quot;)) {
 		String[] parts = mapping.split(&quot;=&quot;);
@@ -461,10 +460,8 @@ catch (Throwable ex) {
 	// prepare time: ensure proper timezone Zulu
 	if (time.length() &gt; 0) {
 		String[] parts = time.substring(1, time.length() - 1).split(&quot;,&quot;);
-		vars.put(&quot;time&quot;, parts[0] + &quot;Z/&quot; + parts[1] + &quot;Z&quot;);
+		vars.put(&quot;wms_time&quot;, parts[0] + &quot;Z/&quot; + parts[1] + &quot;Z&quot;);
 	}
-
-
 
 	// prepare CQL statement with all non-standard parameters
 	String[] variables = vars.get(&quot;request_parameters_names&quot;).split(&quot;,&quot;);
@@ -493,15 +490,13 @@ catch (Throwable ex) {
 	}
 
 	vars.put(&quot;geoserver_cql&quot;, String.join(&quot; AND &quot;, geoServerValues));
-	vars.put(&quot;eoxserver_cql&quot;, String.join(&quot; AND &quot;, eoxServerValues));
-/*
-	
-//}
-//catch (Throwable ex) {
-//    log.error(&quot;Error in Beanshell&quot;, ex);
-//    throw ex;
-//}
-*/</stringProp>
+	vars.put(&quot;eoxserver_cql&quot;, String.join(&quot; AND &quot;, eoxServerValues));	
+}
+catch (Throwable ex) {
+    log.error(&quot;Error in Beanshell&quot;, ex);
+    throw ex;
+}
+</stringProp>
             <stringProp name="TestPlan.comments">For Time and CQL parameter names</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
@@ -580,7 +575,7 @@ catch (Throwable ex) {
                 </elementProp>
                 <elementProp name="time" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${time}</stringProp>
+                  <stringProp name="Argument.value">${wms_time}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">time</stringProp>
@@ -703,7 +698,7 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
                 </elementProp>
                 <elementProp name="time" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${time}</stringProp>
+                  <stringProp name="Argument.value">${wms_time}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">time</stringProp>
