@@ -318,9 +318,9 @@ catch (Throwable ex) {
               <stringProp name="BeanShellAssertion.query">try {
 	String var1 = vars.get(&quot;eoxs_result_count&quot;);
 	String var2 = vars.get(&quot;geos_result_count&quot;);
-	
+
 	Failure = !var1.equals(var2);
-	
+
 	if (Failure) {
 	  FailureMessage = &quot;Variables are not equal. Expected \&quot;&quot; + var1 + &quot;\&quot; , actual:\&quot;&quot; + var2 + &quot;\&quot;&quot;;
 	}
@@ -366,6 +366,7 @@ catch (Throwable ex) {
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
               <sentBytes>true</sentBytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
               <idleTime>true</idleTime>
               <connectTime>true</connectTime>
@@ -402,6 +403,7 @@ catch (Throwable ex) {
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
               <sentBytes>true</sentBytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
               <idleTime>true</idleTime>
               <connectTime>true</connectTime>
@@ -451,7 +453,7 @@ catch (Throwable ex) {
 	for (String mapping : vars.get(&quot;geoserver_cql_mapping&quot;).split(&quot;,&quot;)) {
 		String[] parts = mapping.split(&quot;=&quot;);
 		geoServerMapping.put(parts[0], parts[1]);
-		
+
 	}
 
 	String time = vars.get(&quot;time&quot;);
@@ -465,19 +467,19 @@ catch (Throwable ex) {
 	String[] variables = vars.get(&quot;request_parameters_names&quot;).split(&quot;,&quot;);
 	ArrayList geoServerValues = new ArrayList();
 	ArrayList eoxServerValues = new ArrayList();
-	
+
 	for (String variable : variables) {
 		if (variable.equals(&quot;time&quot;) || variable.equals(&quot;layer&quot;) || variable.equals(&quot;bbox&quot;)) {
 			continue;
 		}
 		String value = vars.get(variable);
-		
+
 		if (value.length() &gt; 0) {
 			String variableGeoServer = geoServerMapping.get(variable);
 
 			if (value.startsWith(&quot;[&quot;)) {
 				String[] parts = value.substring(1, value.length() - 1).split(&quot;,&quot;);
-				
+
 				geoServerValues.add(variableGeoServer + &quot; BETWEEN &quot; + parts[0] + &quot; AND &quot; + parts[1]);
 				eoxServerValues.add(variable + &quot; BETWEEN &quot; + parts[0] + &quot; AND &quot; + parts[1]);
 			} else {
@@ -630,8 +632,8 @@ catch (Throwable ex) {
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
                 <boolProp name="resetInterpreter">false</boolProp>
-                <stringProp name="script">response = prev.getResponseDataAsString(); 
-data_length = new Integer(response.length()); 
+                <stringProp name="script">response = prev.getResponseDataAsString();
+data_length = new Integer(response.length());
 vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
               </BeanShellPostProcessor>
               <hashTree/>
@@ -763,9 +765,9 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
                 <boolProp name="resetInterpreter">false</boolProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
-                <stringProp name="script">response = prev.getResponseDataAsString(); 
-data_length = new Integer(response.length()); 
-vars.put(&quot;eoxs_data_length&quot;, data_length.toString()); 
+                <stringProp name="script">response = prev.getResponseDataAsString();
+data_length = new Integer(response.length());
+vars.put(&quot;eoxs_data_length&quot;, data_length.toString());
 </stringProp>
               </BeanShellPostProcessor>
               <hashTree/>
@@ -791,7 +793,7 @@ vars.put(&quot;eoxs_data_length&quot;, data_length.toString());
 	Float percentage = (((float)diff) / Math.max(eoxsLength, geosLength));
 
 	Failure = percentage &gt; 0.1;
-	
+
 	if (Failure) {
 	  FailureMessage = &quot;Difference between file sizes is more than 10%. Result sizes: EOxServer: &quot; + eoxsLength + &quot; GeoServer: &quot; + geosLength + &quot; Percentage: &quot; + percentage;
 	}
@@ -838,6 +840,7 @@ catch (Throwable ex) {
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
               <sentBytes>true</sentBytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
               <idleTime>true</idleTime>
               <connectTime>true</connectTime>
@@ -874,6 +877,7 @@ catch (Throwable ex) {
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
               <sentBytes>true</sentBytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
               <idleTime>true</idleTime>
               <connectTime>true</connectTime>
