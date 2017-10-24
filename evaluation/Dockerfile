@@ -45,4 +45,4 @@ RUN apt-get update \
   && /apache-jmeter/bin/PluginsManagerCMD.sh available \
   && /apache-jmeter/bin/PluginsManagerCMD.sh install-all-except
 
-ENTRYPOINT ["/apache-jmeter/bin/jmeter benchmark.jmx"]
+ENTRYPOINT ["/apache-jmeter/bin/jmeter"]

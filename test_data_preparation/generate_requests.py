@@ -102,6 +102,8 @@ def generate_requests(definition, randomize, rangeparts, output):
             value_to_string(value)
             for value in rng['values']
         ]
+        if rng['name'] == 'time':
+            continue
         rng['values'].append(None)
 
     valuesets = [
