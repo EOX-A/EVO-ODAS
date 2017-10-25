@@ -14,10 +14,8 @@ URL_LIST_BASE=$(basename $URL_LIST)
 
 IMAGE_NAME="s2preparation"
 
-if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
-    echo "Docker image $IMAGE_NAME not found, building it."
-    docker build -t $IMAGE_NAME .
-fi
+echo "Building Docker image $IMAGE_NAME."
+docker build -t $IMAGE_NAME .
 
 docker run \
     -v `pwd`/scripts:/var/scripts \
