@@ -25,7 +25,7 @@ The preprocessed datasets can now be registered in an EOxServer instance using
 the following commands.
 
     for resolution in 10 20 60 ; do
-        python manage.py eoxs_rangetype_load -i range_types/Sentinel-2_${resolution}m
+        python manage.py eoxs_rangetype_load -i range_types/Sentinel-2_${resolution}m.json
     done
 
     python manage.py eoxs_collection_create -i S2A_OPER
@@ -35,6 +35,26 @@ the following commands.
             python manage.py eoxs_dataset_register -r Sentinel-2_${resolution}m -d "$filename" -m "${filename//.tif/.xml}" --collection "S2A_OPER" --replace --traceback;
         done
     done
+
+
+for resolution in 10 20 60 ; do
+    python manage.py eoxs_rangetype_load -i /var/s2preparation/range_types/Sentinel-2_${resolution}m.json;
+done
+python manage.py eoxs_collection_create -i S2A_OPER
+for file in /var/data/*10m.tif; do
+    filename="$( basename ${file} )"
+    id="${filename%.*}"
+    python manage.py eoxs_dataset_register -r Sentinel-2_${resolution}m -i ${id} -d "$file" -m "${file//.tif/.xml}" --collection "S2A_OPER" --replace --traceback;
+    python manage.py wms_options_set -r 1 -g 2 -b 3 --resampling=AVERAGE --no-auto-scale --min=0 --max=4096 "${id}";
+done
+for resolution in 20 60 ; do
+    for file in /var/data/*${resolution}m.tif; do
+        filename="$( basename ${file} )"
+        id="${filename%.*}"
+        python manage.py eoxs_dataset_register -r Sentinel-2_${resolution}m -i ${id} -d "$file" -m "${file//.tif/.xml}" --replace --traceback;
+    done;
+done
+
 
 ## Usage with Docker
 
