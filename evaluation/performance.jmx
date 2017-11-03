@@ -15,9 +15,8 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="concurrent_users" elementType="Argument">
             <stringProp name="Argument.name">concurrent_users</stringProp>
-            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.value">${__property(concurrent_users)</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">${__property(concurrent_users)}</stringProp>
           </elementProp>
           <elementProp name="request_parameters_csv" elementType="Argument">
             <stringProp name="Argument.name">request_parameters_csv</stringProp>
@@ -33,9 +32,8 @@
           </elementProp>
           <elementProp name="geoserver_url" elementType="Argument">
             <stringProp name="Argument.name">geoserver_url</stringProp>
-            <stringProp name="Argument.value">oda.dlr.de</stringProp>
+            <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">${__property(base_url)}</stringProp>
           </elementProp>
           <elementProp name="geoserver_opensearch_path" elementType="Argument">
             <stringProp name="Argument.name">geoserver_opensearch_path</stringProp>
@@ -44,9 +42,8 @@
           </elementProp>
           <elementProp name="eoxserver_url" elementType="Argument">
             <stringProp name="Argument.name">eoxserver_url</stringProp>
-            <stringProp name="Argument.value">oda.dlr.de</stringProp>
+            <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">${__property(base_url)}</stringProp>
           </elementProp>
           <elementProp name="eoxserver_opensearch_path" elementType="Argument">
             <stringProp name="Argument.name">eoxserver_opensearch_path</stringProp>
