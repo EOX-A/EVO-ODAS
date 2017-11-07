@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.2 r1790748">
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Open Search Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -91,33 +91,37 @@
                   <boolProp name="XPath.namespace">true</boolProp>
                 </XPathAssertion>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection Search Domain Extractor" enabled="true">
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection Template URL extractor" enabled="true">
                   <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ceos_bp_001_collection_search_domain</stringProp>
+                  <stringProp name="XPathExtractor.refname">ceos_bp_001_collection_search_template</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">substring-before(substring-after(substring-before(//opensearch:Url[@rel=&quot;collection&quot;]/@template, &apos;?&apos;), &apos;://&apos;), &apos;/&apos;)</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//opensearch:Url[@rel=&quot;collection&quot;]/@template</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">true</boolProp>
                 </XPathExtractor>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection Search Path Extractor" enabled="true">
-                  <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ceos_bp_001_collection_search_path</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">substring-after(substring-after(substring-before(//opensearch:Url[@rel=&quot;collection&quot;]/@template, &apos;?&apos;), &apos;://&apos;), &apos;/&apos;)</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                  <boolProp name="XPathExtractor.namespace">true</boolProp>
-                </XPathExtractor>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="Template URL components extractor" enabled="true">
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="script">String template = vars.get(&quot;ceos_bp_001_collection_search_template&quot;);
+URL url = new URL(template);
+int port = url.getPort();
+String path = url.getPath();
+String host = url.getHost();
+vars.put(&quot;ceos_bp_001_collection_search_port&quot;, String.valueOf(port));
+vars.put(&quot;ceos_bp_001_collection_search_path&quot;, path);
+vars.put(&quot;ceos_bp_001_collection_search_host&quot;, host);</stringProp>
+                </BeanShellPostProcessor>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${implementation} - CEOS-BP-001 - Support of two step search - step 1 - search" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
                   <collectionProp name="Arguments.arguments"/>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain">${ceos_bp_001_collection_search_domain}</stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.domain">${ceos_bp_001_collection_search_host}</stringProp>
+                <stringProp name="HTTPSampler.port">${ceos_bp_001_collection_search_port}</stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ceos_bp_001_collection_search_path}</stringProp>
@@ -142,33 +146,40 @@
                   <boolProp name="XPath.namespace">true</boolProp>
                 </XPathAssertion>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection OSDD Domain Extractor" enabled="true">
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Atom HREF extractor" enabled="true">
                   <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ceos_bp_001_collection_osdd_domain</stringProp>
+                  <stringProp name="XPathExtractor.refname">ceos_bp_001_collection_osdd_url</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">substring-before(substring-after(//atom:entry/atom:link[@rel=&quot;search&quot;]/@href, &apos;://&apos;), &apos;/&apos;)</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//atom:entry/atom:link[@rel=&quot;search&quot;]/@href</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">true</boolProp>
                 </XPathExtractor>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection OSDD Path Extractor" enabled="true">
-                  <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ceos_bp_001_collection_osdd_path</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">substring-after(substring-after(//atom:entry/atom:link[@rel=&quot;search&quot;]/@href, &apos;://&apos;), &apos;/&apos;)</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                  <boolProp name="XPathExtractor.namespace">true</boolProp>
-                </XPathExtractor>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="Atom HREFcomponents extractor" enabled="true">
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="script">String template = vars.get(&quot;ceos_bp_001_collection_osdd_url&quot;);
+URL url = new URL(template);
+int port = url.getPort();
+String path = url.getPath();
+if(url.getQuery() != null &amp;&amp; !url.getQuery().isEmpty()) {
+	path = path + &quot;?&quot; + url.getQuery();
+}
+String host = url.getHost();
+vars.put(&quot;ceos_bp_001_collection_osdd_port&quot;, String.valueOf(port));
+vars.put(&quot;ceos_bp_001_collection_osdd_path&quot;, path);
+vars.put(&quot;ceos_bp_001_collection_osdd_host&quot;, host);</stringProp>
+                </BeanShellPostProcessor>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${implementation} - CEOS-BP-001 - Support of two step search - step 2 - OSDD" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
                   <collectionProp name="Arguments.arguments"/>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain">${ceos_bp_001_collection_osdd_domain}</stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.domain">${ceos_bp_001_collection_osdd_host}</stringProp>
+                <stringProp name="HTTPSampler.port">${ceos_bp_001_collection_osdd_port}</stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ceos_bp_001_collection_osdd_path}</stringProp>
@@ -193,33 +204,42 @@
                   <boolProp name="XPath.namespace">true</boolProp>
                 </XPathAssertion>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection Search Domain Extractor" enabled="true">
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Results URL extractor" enabled="true">
                   <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ceos_bp_001_granule_search_domain</stringProp>
+                  <stringProp name="XPathExtractor.refname">ceos_bp_001_granule_search_url</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">substring-before(substring-after(substring-before(//opensearch:Url[@rel=&quot;results&quot;]/@template, &apos;?&apos;), &apos;://&apos;), &apos;/&apos;)</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//opensearch:Url[@rel=&quot;results&quot;]/@template</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">false</boolProp>
                   <boolProp name="XPathExtractor.namespace">true</boolProp>
                 </XPathExtractor>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Collection Search Path Extractor" enabled="true">
-                  <stringProp name="XPathExtractor.default"></stringProp>
-                  <stringProp name="XPathExtractor.refname">ceos_bp_001_granule_search_path</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">substring-after(substring-after(substring-before(//opensearch:Url[@rel=&quot;results&quot;]/@template, &apos;?&apos;), &apos;://&apos;), &apos;/&apos;)</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                  <boolProp name="XPathExtractor.namespace">true</boolProp>
-                </XPathExtractor>
+                <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="Results URL components extractor" enabled="true">
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="script">String template = vars.get(&quot;ceos_bp_001_granule_search_url&quot;);
+URL url = new URL(template);
+int port = url.getPort();
+String path = url.getPath();
+if(url.getQuery() != null &amp;&amp; !url.getQuery().isEmpty()) {
+	String query = url.getQuery();
+	String cleanedQuery = query.replaceAll(&quot;\\{(.*?)\\}&quot;, &quot;&quot;);
+	path = path + &quot;?&quot; + cleanedQuery;
+}
+String host = url.getHost();
+vars.put(&quot;ceos_bp_001_granule_search_port&quot;, String.valueOf(port));
+vars.put(&quot;ceos_bp_001_granule_search_path&quot;, path);
+vars.put(&quot;ceos_bp_001_granule_search_host&quot;, host);</stringProp>
+                </BeanShellPostProcessor>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${implementation} - CEOS-BP-001 - Support of two step search - step 2 - search" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
                   <collectionProp name="Arguments.arguments"/>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain">${ceos_bp_001_granule_search_domain}</stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.domain">${ceos_bp_001_granule_search_host}</stringProp>
+                <stringProp name="HTTPSampler.port">${ceos_bp_001_granule_search_port}</stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
                 <stringProp name="HTTPSampler.contentEncoding"></stringProp>
                 <stringProp name="HTTPSampler.path">${ceos_bp_001_granule_search_path}</stringProp>
@@ -485,7 +505,7 @@
                   </elementProp>
                   <elementProp name="${start_index_var}" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">1</stringProp>
+                    <stringProp name="Argument.value">2</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">${start_index_var}</stringProp>
