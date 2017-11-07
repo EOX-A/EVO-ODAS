@@ -15,7 +15,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="concurrent_users" elementType="Argument">
             <stringProp name="Argument.name">concurrent_users</stringProp>
-            <stringProp name="Argument.value">${__property(concurrent_users)</stringProp>
+            <stringProp name="Argument.value">${__property(concurrent_users)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="request_parameters_csv" elementType="Argument">
