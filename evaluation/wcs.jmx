@@ -20,13 +20,13 @@
           </elementProp>
           <elementProp name="base_url" elementType="Argument">
             <stringProp name="Argument.name">base_url</stringProp>
-            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc">${__property(base_url)}</stringProp>
           </elementProp>
           <elementProp name="port" elementType="Argument">
             <stringProp name="Argument.name">port</stringProp>
-            <stringProp name="Argument.value">8001</stringProp>
+            <stringProp name="Argument.value"></stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -60,10 +60,10 @@
             <boolProp name="recycle">false</boolProp>
             <stringProp name="shareMode">shareMode.all</stringProp>
             <boolProp name="stopThread">true</boolProp>
-            <stringProp name="variableNames">coverage_id,subset_x,subset_y,subsetting_crs,output_crs,format,size_x,size_y,range_subset</stringProp>
+            <stringProp name="variableNames">path,coverage_id,subset_x,subset_y,subsetting_crs,output_crs,format,size_x,size_y,range_subset,extra_parameters,scale_x_axis_name,scale_y_axis_name,subset_x_axis_name,subset_y_axis_name,description</stringProp>
           </CSVDataSet>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${description}" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="service" elementType="HTTPArgument">
@@ -128,7 +128,7 @@
             <stringProp name="HTTPSampler.port">${port}</stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">ows</stringProp>
+            <stringProp name="HTTPSampler.path">${path}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -143,35 +143,59 @@
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
               <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">String axisX = vars.get(&quot;x_axis_name&quot;);
-String axisY = vars.get(&quot;y_axis_name&quot;);
+              <stringProp name="script">String axisXSubset = vars.get(&quot;subset_x_axis_name&quot;);
+String axisYSubset = vars.get(&quot;subset_y_axis_name&quot;);
+
+String axisXScale = vars.get(&quot;scale_x_axis_name&quot;);
+String axisYScale = vars.get(&quot;scale_y_axis_name&quot;);
 
 String subsetX = vars.get(&quot;subset_x&quot;);
 String subsetY = vars.get(&quot;subset_y&quot;);
 String sizeX = vars.get(&quot;size_x&quot;);
 String sizeY = vars.get(&quot;size_y&quot;);
 
-Arguments args = sampler.getArguments();
+String subsettingCrs = vars.get(&quot;subsetting_crs&quot;);
+String outputCrs = vars.get(&quot;output_crs&quot;);
+String rangeSubset = vars.get(&quot;range_subset&quot;);
 
-if (subsetX.length()) {
-	args.addArgument(&quot;subset&quot;, subsetX);
+if (subsetX.length() &gt; 0) {
+	String[] parts = subsetX.split(&quot;:&quot;);
+	sampler.addNonEncodedArgument(&quot;subset&quot;, axisXSubset + &quot;(&quot; + parts[0] +  &quot;,&quot; + parts[1] + &quot;)&quot;, null);
 }
-if (subsetY.length()) {
-	args.addArgument(&quot;subset&quot;, subsetY);
+if (subsetY.length() &gt; 0) {
+	String[] parts = subsetY.split(&quot;:&quot;);
+	sampler.addNonEncodedArgument(&quot;subset&quot;, axisYSubset + &quot;(&quot; + parts[0] +  &quot;,&quot; + parts[1] + &quot;)&quot;, null);
 }
 
 ArrayList sizes = new ArrayList();
-if (sizeX.length()) {
-	sizes.add(axisX + &quot;(&quot; + sizeX + &quot;)&quot;);
+if (sizeX.length() &gt; 0) {
+	sizes.add(axisXScale + &quot;(&quot; + sizeX + &quot;)&quot;);
 }
-if (sizeY.length()) {
-	sizes.add(axisY + &quot;(&quot; + sizeY + &quot;)&quot;);
-}
-
-if (sizes.length()) {
-	args.addArgument(&quot;scaleSizes&quot;, String.join(&quot;,&quot;, sizes));
+if (sizeY.length() &gt; 0) {
+	sizes.add(axisYScale + &quot;(&quot; + sizeY + &quot;)&quot;);
 }
 
+if (sizes.size() &gt; 0) {
+	sampler.addNonEncodedArgument(&quot;scaleSize&quot;, String.join(&quot;,&quot;, sizes), null);
+}
+
+if (subsettingCrs.length() == 0) {
+	sampler.getArguments().removeArgument(&quot;subsettingCrs&quot;);
+} else {
+	sampler.addNonEncodedArgument(&quot;subsettingCrs&quot;, subsettingCrs, null);
+}
+
+if (outputCrs.length() == 0) {
+	sampler.getArguments().removeArgument(&quot;outputCrs&quot;);
+} else {
+	sampler.addNonEncodedArgument(&quot;outputCrs&quot;, outputCrs, null);
+}
+
+if (rangeSubset.length() == 0) {
+	sampler.getArguments().removeArgument(&quot;rangeSubset&quot;);
+} else {
+	sampler.addNonEncodedArgument(&quot;rangeSubset&quot;, rangeSubset, null);
+}
 </stringProp>
             </BeanShellPreProcessor>
             <hashTree/>
@@ -185,6 +209,12 @@ if (sizes.length()) {
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug ${description}" enabled="false">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
+          <hashTree/>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>

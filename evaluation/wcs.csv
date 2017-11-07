@@ -1,8 +1,7 @@
-coverage_id,subset_x,subset_y,subsetting_crs,output_crs,format,size_x,size_y,range_subset
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,60000:65000,,,,image/tiff,100,100,B01
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,65000:70000,,,,image/tiff,100,100,B01
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,,53000:53500,,,image/tiff,100,100,B01
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,,53500:54000,,,image/tiff,100,100,B01
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,,,,,image/tiff,100,100,B01
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,,,,http://www.opengis.net/def/crs/EPSG/0/4326,image/tiff,100,100,B01
-S2A_MSIL1C_20170325T101021_N0204_R022_T32UPU_20170325T101018.SAFE_B01,,,,http://www.opengis.net/def/crs/EPSG/0/3857,image/tiff,100,100,B01
+path,coverage_id,subset_x,subset_y,subsetting_crs,output_crs,format,size_x,size_y,range_subset,extra_parameters,scale_x_axis_name,scale_y_axis_name,subset_x_axis_name,subset_y_axis_name,description
+eoxserver/ows,S2A_MSIL1C_20171024T102111_N0206_R065_T32TLN_20171024T140204_TCI,,,,,image/tiff,100,100,,,x,y,x,y,eoxserver
+eoxserver/ows,S2A_MSIL1C_20171024T102111_N0206_R065_T32TLN_20171024T140204_TCI,7:7.5,42.5:43.0,http://www.opengis.net/def/crs/EPSG/0/4326,,image/tiff,100,100,,,x,y,x,y,eoxserver spatial subset
+eoxserver/ows,S2A_MSIL1C_20171024T102111_N0206_R065_T32TLN_20171024T140204_TCI,,,,,image/tiff,100,100,B04,,x,y,x,y,eoxserver range subset
+eoxserver/ows,S2A_MSIL1C_20171024T102111_N0206_R065_T32TLN_20171024T140204_TCI,7:7.5,42.5:43.0,http://www.opengis.net/def/crs/EPSG/0/4326,,image/tiff,100,100,B04,,x,y,x,y,eoxserver spatial subset and range subset
+geoserver/evoodas/S2_MSI_L1C_MOSAIC/wcs,evoodas__S2_MSI_L1C_MOSAIC,4.31188688551:5.80284668291,46.858181972:47.8194744025,,,image/tiff,10,10,,CQL_FILTER=eoIdentifier='S2A_MSIL1C_20171106T103221_N0206_R108_T31TFN_20171106T124721',i,j,http://www.opengis.net/def/axis/OGC/0/Long,http://www.opengis.net/def/axis/OGC/0/Lat,geoserver spatial subset
+geoserver/evoodas/S2_MSI_L1C_MOSAIC/wcs,evoodas__S2_MSI_L1C_MOSAIC,4.31188688551:5.80284668291,46.858181972:47.8194744025,,,image/tiff,10,10,B01:B02,CQL_FILTER=eoIdentifier='S2A_MSIL1C_20171106T103221_N0206_R108_T31TFN_20171106T124721',i,j,http://www.opengis.net/def/axis/OGC/0/Long,http://www.opengis.net/def/axis/OGC/0/Lat,geoserver spatial subset and range subset
