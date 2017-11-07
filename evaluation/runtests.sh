@@ -3,7 +3,8 @@
 USER_PROPERTIES="user_internal.properties"
 PUBLISH_DIR="/oda/repository/testplan/"
 #TESTS="ceos"
-TESTS="performance wcs ceos evo-odas-tn benchmark"
+#TESTS="performance wcs ceos evo-odas-tn benchmark"
+TESTS="ceos evo-odas-tn wcs benchmark"
 EXT_LIST="csv html jmx jtl log"
 
 for test in $TESTS; do 
