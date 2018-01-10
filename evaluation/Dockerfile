@@ -45,4 +45,6 @@ RUN apt-get update \
   && /apache-jmeter/bin/PluginsManagerCMD.sh available \
   && /apache-jmeter/bin/PluginsManagerCMD.sh install-all-except
 
+RUN apt-get install python
+
 ENTRYPOINT ["/apache-jmeter/bin/jmeter"]

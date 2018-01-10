@@ -45,6 +45,11 @@
             <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="eoxserver_wms_enabled" elementType="Argument">
+            <stringProp name="Argument.name">eoxserver_wms_enabled</stringProp>
+            <stringProp name="Argument.value">${__property(eoxserver_wms_enabled)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>       
           <elementProp name="eoxserver_opensearch_path" elementType="Argument">
             <stringProp name="Argument.name">eoxserver_opensearch_path</stringProp>
             <stringProp name="Argument.value">/eoxserver/opensearch</stringProp>
@@ -103,6 +108,20 @@
             <stringProp name="Authorization.domain"></stringProp>
             <stringProp name="Authorization.realm">EVO-ODAS EOxServer</stringProp>
           </elementProp>
+          <elementProp name="" elementType="Authorization">
+            <stringProp name="Authorization.url">http://ows-oda.eoc.dlr.de</stringProp>
+            <stringProp name="Authorization.username">evouser</stringProp>
+            <stringProp name="Authorization.password">evo16odas!</stringProp>
+            <stringProp name="Authorization.domain"></stringProp>
+            <stringProp name="Authorization.realm">EVO-ODAS EOxServer</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Authorization">
+            <stringProp name="Authorization.url">http://ows-oda.eoc.dlr.de</stringProp>
+            <stringProp name="Authorization.username">evouser</stringProp>
+            <stringProp name="Authorization.password">evo16odas!</stringProp>
+            <stringProp name="Authorization.domain"></stringProp>
+            <stringProp name="Authorization.realm">EVO-ODAS EOxServer</stringProp>
+          </elementProp>          
         </collectionProp>
       </AuthManager>
       <hashTree/>
@@ -933,7 +952,7 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - WMS EOxServer" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - WMS EOxServer" enabled="false">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>

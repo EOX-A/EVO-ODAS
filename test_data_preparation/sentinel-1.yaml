@@ -1,0 +1,4 @@
+layer: SENTINEL1
+bbox: [5.0, 40.0, 20.0, 55.0]
+time: [!!timestamp '2017-11-01T00:00:00', !!timestamp '2017-11-09T00:00:00']
+

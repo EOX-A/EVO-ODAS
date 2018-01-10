@@ -1,6 +1,6 @@
 layer: SENTINEL2
-bbox: [5.0, 41.0, 20.0, 51.0]
-time: [!!timestamp '2017-10-18T00:00:00', !!timestamp '2017-10-21T00:00:00']
+bbox: [5.0, 40.0, 20.0, 55.0]
+time: [!!timestamp '2017-11-08T00:00:00', !!timestamp '2017-11-09T00:00:00']
 metadata:
   cloudCover:
     min: 0

@@ -40,6 +40,11 @@
             <stringProp name="Argument.value">${__property(base_url)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="eoxserver_wms_enabled" elementType="Argument">
+            <stringProp name="Argument.name">eoxserver_wms_enabled</stringProp>
+            <stringProp name="Argument.value">${__property(eoxserver_wms_enabled)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>          
           <elementProp name="eoxserver_opensearch_path" elementType="Argument">
             <stringProp name="Argument.name">eoxserver_opensearch_path</stringProp>
             <stringProp name="Argument.value">/eoxserver/opensearch</stringProp>
@@ -638,7 +643,7 @@ vars.put(&quot;geos_data_length&quot;, data_length.toString()); </stringProp>
               </BeanShellPostProcessor>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="WMS EOxServer" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="WMS EOxServer" enabled="${eoxserver_wms_enabled}">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="service" elementType="HTTPArgument">
